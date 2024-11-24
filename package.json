@@ -1,0 +1,19 @@
+{
+  "name": "vols_app",
+  "version": "1.0.0",
+  "description": "API pour la gestion de vols",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon serveur.js"
+  },
+  "author": "Kevin Jesus,Djamel Ns,Térence Sionneau",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  }
+}
