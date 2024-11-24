@@ -1,25 +1,26 @@
-import data from "../../../data/vols.js";
+import vols from "../../../data/vols.js";
+
 
 export const getAll = async (filters)=>{
-    return filter(data, filters)
+    return filter(vols, filters)
 }
 export const getById = async (id)=>{
-    return data.find((item)=> item.idVol === id)
+    return vols.find((item)=> item.idVol === id)
 }
 
 export const deleteById = async (id)=>{
-    const index = data.findIndex((item)=> item.id === id);
-    data.splice(index,1);
+    const index = vols.findIndex((item)=> item.id === id);
+    vols.splice(index,1);
 }
 
 export const createVol = async (vol)=>{
-    data.push(vol);
-    JSON.stringify(data);
+    vols.push(vol);
+    JSON.stringify(vols);
 }
 
 
 function filter(data, filters){
-    const { id, destination, dated,minReserv,maxReserv, orderBy, order } = filters;
+    const { idVol, destination, dated,minReserv,maxReserv, orderBy, order } = filters;
     let results = data;
 
     if (idVol){

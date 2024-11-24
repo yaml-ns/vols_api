@@ -1,5 +1,5 @@
 import {deleteById, getAll, getById} from "../models/volModel.js";
-import {readData, writeData} from "../../../services/cocktailDataReader.js";
+import vols from "../../../data/vols.js";
 
 
 export const getVols = async (req, res)=>{
@@ -19,9 +19,7 @@ export const getVols = async (req, res)=>{
 export const createVol = async (req, res)=>{
     const vol = req.body;
     try {
-        const vols = await readData();
         vols.push(vol)
-        await writeData(JSON.stringify(vols,null,2))
         res.statusCode = 201;
         res.json(vol)
     }catch (e){

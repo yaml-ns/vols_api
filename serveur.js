@@ -1,18 +1,12 @@
 import http from "http"
-import path from "path";
 import dotenv from "dotenv";
 import express from "express"
-import { fileURLToPath } from "url";
 import apiRouter from "./api/routes/apiRouter.js";
 
 const app = express();
 dotenv.config()
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-
-app.use(express.static("./client"));
 app.use(express.json())
 app.use("/api",apiRouter);
 
