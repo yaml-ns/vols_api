@@ -8,16 +8,31 @@ export const getById = async (id)=>{
     return vols.find((item)=> item.idVol === id)
 }
 
+
+export const addVol = async (vol)=>{
+    vol.idVol = nextId()
+    vols.push(vol);
+    return vol;
+}
+
+export const updateVol = async (vol)=>{
+
+    const index = vols.findIndex(v => v.idVol === vol.idVol);
+    if (index !== -1) {
+        vols[index] = vol;
+        return vol;
+    }
+    return null;
+}
 export const deleteById = async (id)=>{
     const index = vols.findIndex((item)=> item.id === id);
     vols.splice(index,1);
 }
 
-export const createVol = async (vol)=>{
-    vols.push(vol);
-    JSON.stringify(vols);
+export const nextId = ()=>{
+    const lastId = vols.reduce((max, vol) => (vol.idVol > max ? vol.idVol : max), 0);
+    return lastId + 1;
 }
-
 
 function filter(data, filters){
     const { idVol, destination, dated,minReserv,maxReserv, orderBy, order } = filters;

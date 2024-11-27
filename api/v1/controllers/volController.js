@@ -1,5 +1,4 @@
-import {deleteById, getAll, getById} from "../models/volModel.js";
-import vols from "../../../data/vols.js";
+import {deleteById, getAll, getById, addVol, updateVol} from "../models/volModel.js";
 
 
 export const getVols = async (req, res)=>{
@@ -19,13 +18,28 @@ export const getVols = async (req, res)=>{
 export const createVol = async (req, res)=>{
     const vol = req.body;
     try {
-        vols.push(vol)
+        const createdVol = addVol(vol);
         res.statusCode = 201;
-        res.json(vol)
+        res.json(createdVol)
     }catch (e){
         console.log(e);
         res.statusCode = 500;
         res.json({error:"une erreur s'est produite"});
+    }
+}
+
+export const update = async (req,res)=>{
+    const vol = req.body;
+    const volExiste = await getById(vol.idVol)
+    if (volExiste) {
+        const updatedVol =await updateVol(vol)
+        if (updatedVol){
+            res.statusCode = 200;
+            res.json(updatedVol);
+        }
+    }else{
+        res.statusCode = 404;
+        res.json({status: "erreur",message:"Le vol n'existe pas !"})
     }
 }
 export const getVol = async (req, res)=>{
