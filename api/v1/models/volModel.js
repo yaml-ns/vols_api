@@ -10,7 +10,9 @@ export const getById = async (id)=>{
 
 
 export const addVol = async (vol)=>{
+    console.log("add vol")
     vol.idVol = nextId()
+    console.log(vol)
     vols.push(vol);
     return vol;
 }
@@ -24,8 +26,18 @@ export const updateVol = async (vol)=>{
     }
     return null;
 }
+export const reserver = async (id,reservations)=>{
+
+    const index = vols.findIndex(v => v.idVol === id);
+    if (index !== -1) {
+        const vol = vols[index];
+        vol.reserv += reservations;
+        return vol;
+    }
+    return null;
+}
 export const deleteById = async (id)=>{
-    const index = vols.findIndex((item)=> item.id === id);
+    const index = vols.findIndex((item)=> item.idVol === id);
     vols.splice(index,1);
 }
 
@@ -39,7 +51,7 @@ function filter(data, filters){
     let results = data;
 
     if (idVol){
-        results = results.filter( vol =>  data.idVol === parseInt(id));
+        results = results.filter( vol =>  vol.idVol === parseInt(idVol));
     }
     if (destination){
         results = results.filter(vol=> {

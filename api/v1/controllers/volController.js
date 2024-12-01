@@ -1,4 +1,4 @@
-import {deleteById, getAll, getById, addVol, updateVol} from "../models/volModel.js";
+import {deleteById, getAll, getById, addVol, updateVol, reserver} from "../models/volModel.js";
 
 
 export const getVols = async (req, res)=>{
@@ -58,7 +58,22 @@ export const deleteVol = async (req, res)=>{
         res.statusCode = 404;
         res.json({status: "erreur", message:"Not found"})
     }else{
-        await deleteById(vol.id)
+        await deleteById(vol.idVol)
+        res.json({
+            status: 200,
+            message: `Le vol ${req.params.id} a bien été supprimé`
+        })
+    }
+}
+
+export const reserverVol = async (req,res)=>{
+    const reservations = parseInt(req.params.reservations)
+    const vol = await getById(parseInt(req.params.id))
+    if (!vol){
+        res.statusCode = 404;
+        res.json({status: "erreur", message:"Not found"})
+    }else{
+        await reserver(vol.idVol,reservations)
         res.json({
             status: 200,
             message: `Le vol ${req.params.id} a bien été supprimé`
