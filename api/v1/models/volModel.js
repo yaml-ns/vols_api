@@ -10,9 +10,7 @@ export const getById = async (id)=>{
 
 
 export const addVol = async (vol)=>{
-    console.log("add vol")
     vol.idVol = nextId()
-    console.log(vol)
     vols.push(vol);
     return vol;
 }
